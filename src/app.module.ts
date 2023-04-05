@@ -7,6 +7,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { ProductsModule } from './products/products.module';
 import { ConfigModule } from '@nestjs/config';
 import { Product } from './products/products.model';
+import { RolesModule } from './roles/roles.module';
 
 
 @Module({
@@ -27,6 +28,7 @@ import { Product } from './products/products.model';
       autoLoadModels: true,
     }),
     ProductsModule,
+    RolesModule,
   ],
   controllers: [UserController, AuthController],
   providers: []

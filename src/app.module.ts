@@ -11,6 +11,7 @@ import { UserRoles } from './roles/user-roles.model';
 import { AuthModule } from './auth/auth.module';
 import { CategoriesModule } from './categories/categories.module';
 import { Category } from './categories/categories.model';
+import { BakeriesModule } from './bakeries/bakeries.module';
 
 
 @Module({
@@ -33,6 +34,7 @@ import { Category } from './categories/categories.model';
     UsersModule,
     AuthModule,
     CategoriesModule,
+    BakeriesModule,
   ],
   controllers: [],
   providers: []

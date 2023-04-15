@@ -45,6 +45,13 @@ export class ProductsController {
         return this.productsService.findByBakery(bakery);
     }
 
+    @ApiOperation({summary: "Вывод всех продуктов по указанному названию"})
+    @ApiResponse({status: 200, type: [Product]})
+    @Get('/getByTitle/:value')
+    findByTitle(@Param('value') value: string) {
+        return this.productsService.findByTitle(value);
+    }
+
     @ApiOperation({summary: "Удалить продукт по ID"})
     @ApiResponse({status: 200})
     @Delete('/delete/:id')

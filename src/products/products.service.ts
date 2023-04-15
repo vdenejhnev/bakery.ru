@@ -2,6 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { Product } from './products.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateProductDTO } from './dto/create-product.dto';
+import { Op } from 'sequelize';
+
+
+//Доделать поиск товара по названию
 
 @Injectable()
 export class ProductsService {
@@ -44,6 +48,36 @@ export class ProductsService {
         return products;
     }
 
+    async findByTitle(value: string) {
+        const products = await this.productRepo.findAll({
+            where: {
+                [Op.or]: [
+                    {
+                        title: {
+                            [Op.like]: '%' + value + '%'
+                        }
+                    },
+                    {
+                        title: {
+                            [Op.like]: '%' + value.toUpperCase() + '%'
+                        }
+                    },
+                    {
+                        title: {
+                            [Op.like]: '%' + value.toLowerCase() + '%'
+                        }
+                    },
+                    {
+                        title: {
+                            [Op.like]: '%' + this.capitalize(value) + '%'
+                        }
+                    }
+                ]
+            }
+        });
+        return products;
+    }
+
     async delete(id: number) {
         const products = await this.productRepo.destroy({
             where: {
@@ -51,5 +85,9 @@ export class ProductsService {
             }
         });
         return products;
+    }
+
+    capitalize(str: string): string {
+        return str.charAt(0).toUpperCase() + str.slice(1);
     }
 }

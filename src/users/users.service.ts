@@ -20,4 +20,9 @@ export class UsersService {
         const users = await this.userRepo.findAll({include: {all: true}});
         return users;
     }
+
+    async getUserByPhone(phone: string) {
+        const user = await this.userRepo.findOne({where: {phone}, include: {all: true}})
+        return user;
+    }
 }

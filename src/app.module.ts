@@ -8,6 +8,8 @@ import { Role } from './roles/roles.model';
 import { UsersModule } from './users/users.module';
 import { User } from './users/users.model';
 import { UserRoles } from './roles/user-roles.model';
+import { AuthModule } from './auth/auth.module';
+import { CategoriesModule } from './categories/categories.module';
 
 
 @Module({
@@ -28,6 +30,8 @@ import { UserRoles } from './roles/user-roles.model';
     ProductsModule,
     RolesModule,
     UsersModule,
+    AuthModule,
+    CategoriesModule,
   ],
   controllers: [],
   providers: []

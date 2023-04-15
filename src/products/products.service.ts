@@ -12,8 +12,44 @@ export class ProductsService {
         return product;
     }
 
+    async getProduct(id: number) {
+        const product = await this.productRepo.findAll({
+            where: {
+                id: id
+            }
+        });
+        return product;
+    }
+
     async getAllProduct() {
         const products = await this.productRepo.findAll();
+        return products;
+    }
+
+    async findByCategory(category: number) {
+        const products = await this.productRepo.findAll({
+            where: {
+                category: category
+            }
+        });
+        return products;
+    }
+
+    async findByBakery(bakery: number) {
+        const products = await this.productRepo.findAll({
+            where: {
+                bakery: bakery
+            }
+        });
+        return products;
+    }
+
+    async delete(id: number) {
+        const products = await this.productRepo.destroy({
+            where: {
+                id: id
+            }
+        });
         return products;
     }
 }

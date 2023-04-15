@@ -1,5 +1,4 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { INTEGER } from "sequelize";
 import { Column, DataType, Model, Table } from "sequelize-typescript";
 
 interface ProductCreationAttrs {

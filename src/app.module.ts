@@ -10,6 +10,7 @@ import { User } from './users/users.model';
 import { UserRoles } from './roles/user-roles.model';
 import { AuthModule } from './auth/auth.module';
 import { CategoriesModule } from './categories/categories.module';
+import { Category } from './categories/categories.model';
 
 
 @Module({
@@ -24,7 +25,7 @@ import { CategoriesModule } from './categories/categories.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      models: [Product, Role, User, UserRoles],
+      models: [Product, Category , Role, User, UserRoles],
       autoLoadModels: true,
     }),
     ProductsModule,

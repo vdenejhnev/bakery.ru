@@ -18,7 +18,7 @@ export class ProductsController {
     }
 
     @ApiOperation({summary: "Вывод продукта по ID"})
-    @ApiResponse({status: 200, type: [Product]})
+    @ApiResponse({status: 200, type: Product})
     @Get('/get/:id')
     get(@Param('id') id: number) {
         return this.productsService.getProduct(id);
@@ -28,7 +28,7 @@ export class ProductsController {
     @ApiResponse({status: 200, type: [Product]})
     @Get('/getAll')
     getAll() {
-        return this.productsService.getAllProduct();
+        return this.productsService.getAllProducts();
     }
 
     @ApiOperation({summary: "Вывод всех продуктов указанной категории"})

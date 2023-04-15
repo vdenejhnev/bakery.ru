@@ -13,7 +13,7 @@ export class ProductsService {
     }
 
     async getProduct(id: number) {
-        const product = await this.productRepo.findAll({
+        const product = await this.productRepo.findOne({
             where: {
                 id: id
             }
@@ -21,7 +21,7 @@ export class ProductsService {
         return product;
     }
 
-    async getAllProduct() {
+    async getAllProducts() {
         const products = await this.productRepo.findAll();
         return products;
     }

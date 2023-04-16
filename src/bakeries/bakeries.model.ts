@@ -11,7 +11,7 @@ interface BakeryCreationAttrs {
     owner: number;
 }
 
-@Table({tableName: 'пекарни'})
+@Table({tableName: 'bakeries'})
 export class Bakery extends Model<Bakery, BakeryCreationAttrs> {
     @ApiProperty({example: '1', description: "ID пекарни"})
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
@@ -41,7 +41,11 @@ export class Bakery extends Model<Bakery, BakeryCreationAttrs> {
     @Column({type: DataType.STRING, allowNull: false})
     address: string;
 
-    @ApiProperty({example: '5', description: "ID владельца"})
+    @ApiProperty({example: 1, description: "ID владельца"})
     @Column({type: DataType.INTEGER, allowNull: false})
     owner: number;
+
+    @ApiProperty({example: false, description: "Блокировка пекарни"})
+    @Column({type: DataType.BOOLEAN, allowNull: false, defaultValue: false})
+    banned: boolean;
 }

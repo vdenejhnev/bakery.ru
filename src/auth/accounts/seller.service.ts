@@ -38,16 +38,16 @@ export class SellerService {
         const now_timestamp = new Date().getTime()
 
         // check the entered SMS code with the previously sent one && check if the time has passed from the moment of sending to the moment of entering < 2 minutes
-        if (Number(smsCode) === Number(exist_seller.activationCode[0]) && Math.floor((now_timestamp - Number(exist_seller.activationCode[1])) / (60 * 1000)) < 2) {
-            // if isReg === true -> it means the user is already registered and we send him tokens
-            if (exist_seller.isReg) {
-                return await this.generateTokens(exist_seller.phone, exist_seller.id)
-            }
-            // not registered
-            return {
-                isReg: false
-            }
-        }
+        // if (Number(smsCode) === Number(exist_seller.activationCode[0]) && Math.floor((now_timestamp - Number(exist_seller.activationCode[1])) / (60 * 1000)) < 2) {
+        //     // if isReg === true -> it means the user is already registered and we send him tokens
+        //     if (exist_seller.isReg) {
+        //         return await this.generateTokens(exist_seller.phone, exist_seller.id)
+        //     }
+        //     // not registered
+        //     return {
+        //         isReg: false
+        //     }
+        // }
     }
 
     // account registration

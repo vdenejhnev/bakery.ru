@@ -20,11 +20,10 @@ import { SellersModule } from './accounts/sellers/sellers.module';
   imports: [
     ConfigModule.forRoot( {
         envFilePath: `.${process.env.NODE_ENV}`
-    })
+    }),
+    SellersModule
   ],
   controllers: [],
-  providers: [
-    SellersModule
-  ]
+  providers: [ ]
 })
 export class AppModule {}

@@ -4,7 +4,7 @@ import { Seller } from "./sellers.model";
 @Injectable()
 export class SellersService {
     constructor (
-        @Inject('CATS_REPOSITORY') private sellerRepo: typeof Seller,
+        @Inject('SELLERS_REPOSITORY') private sellerRepo: typeof Seller,
     ) {}
 
     async getSellerByPhone(phone: number) {

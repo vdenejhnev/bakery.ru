@@ -14,27 +14,24 @@ interface SellerCreationAttrs {
 }
 
 @Table({tableName: 'sellers'})
-export class Seller extends Model<Seller, SellerCreationAttrs> {
-    @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
-    id: number;
-
-    @Column({type: DataType.STRING, allowNull: false, defaultValue: "Продавец"})
+export class Seller extends Model<Seller> {
+    @Column
     name: string;
 
-    @Column({type: DataType.INTEGER, allowNull: false})
+    @Column
     phone: number;
 
-    @Column({type: DataType.STRING})
+    @Column
     email: string;
 
-    @Column({type: DataType.INTEGER})
+    @Column
     balance: number;
 
-    @Column({type: DataType.BOOLEAN})
+    @Column
     isReg: boolean;
 
-    @Column({type: DataType.ARRAY(DataType.INTEGER)})
-    activationCode: Array<number>;
+    // @Column
+    // activationCode: Array<number>;
 
     // @HasMany(() => Bakery)
     // bakeries: Bakery[]

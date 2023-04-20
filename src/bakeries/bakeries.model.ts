@@ -1,5 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
+import { Seller } from "src/accounts/sellers/sellers.model";
+import { Product } from "src/products/products.model";
 
 interface BakeryCreationAttrs {
     title: string;
@@ -41,11 +43,13 @@ export class Bakery extends Model<Bakery, BakeryCreationAttrs> {
     @Column({type: DataType.STRING, allowNull: false})
     address: string;
 
-    @ApiProperty({example: 1, description: "ID владельца"})
-    @Column({type: DataType.INTEGER, allowNull: false})
-    owner: number;
+    @HasMany(() => Product)
+    products: Product[]
+    
+    @ForeignKey(() => Seller)
+    @Column({ field: 'SELLER_ID' })
+    sellerId: number;
 
-    @ApiProperty({example: false, description: "Блокировка пекарни"})
-    @Column({type: DataType.BOOLEAN, allowNull: false, defaultValue: false})
-    banned: boolean;
+    @BelongsTo(() => Seller)
+    seller: Seller
 }

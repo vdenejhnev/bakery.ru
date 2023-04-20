@@ -1,4 +1,5 @@
-import { BelongsTo, BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, BelongsToMany, Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { Bakery } from "src/bakeries/bakeries.model";
 
 
 interface SellerCreationAttrs {
@@ -34,4 +35,7 @@ export class Seller extends Model<Seller, SellerCreationAttrs> {
 
     @Column({type: DataType.ARRAY(DataType.INTEGER)})
     activationCode: Array<number>;
+
+    // @HasMany(() => Bakery)
+    // bakeries: Bakery[]
 }

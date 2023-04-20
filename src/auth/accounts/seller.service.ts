@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { SellersService } from "src/accounts/sellers/sellers.service";
 import generateSmsCode from "src/helpers/generateSmsCode";

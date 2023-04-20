@@ -5,10 +5,13 @@ import { Seller } from "./sellers.model";
 //
 import { SellersController } from "./sellers.controller";
 import { SellersService } from "./sellers.service";
+import { DatabaseModule } from "src/database.module";
+import { databaseProviders } from "src/database.providers";
+import { sellersProviders } from "./sellers.providers";
 
 @Module({
-  imports: [SequelizeModule.forFeature([Seller])],
+  imports: [DatabaseModule],
   controllers: [SellersController],
-  providers: [SellersService]
+  providers: [SellersService, ...sellersProviders]
 })
 export class SellersModule { }

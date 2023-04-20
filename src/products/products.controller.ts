@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { CreateProductDTO } from './dto/create-product.dto';
 import { ProductsService } from './products.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Product } from './products.model';
+import { AtSellerGuard } from 'src/common/guards/at.seller.guard';
 
 @ApiTags('Продукты')
 @Controller('products')
@@ -12,6 +13,7 @@ export class ProductsController {
 
     @ApiOperation({summary: "Создание продукта"})
     @ApiResponse({status: 200, type: Product})
+    @UseGuards(AtSellerGuard)
     @Post() 
     create(@Body() productdto: CreateProductDTO) {
         return this.productsService.createProduct(productdto);
@@ -54,6 +56,7 @@ export class ProductsController {
 
     @ApiOperation({summary: "Удалить продукт по ID"})
     @ApiResponse({status: 200})
+    @UseGuards(AtSellerGuard)
     @Delete('/delete/:id')
     delete(@Param('id') id: number) {
         return this.productsService.delete(id);

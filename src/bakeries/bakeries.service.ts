@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Bakery } from './bakeries.model';
 import { CreateBakeryDTO } from './dto/create-bakery.dto';
 
 @Injectable()
 export class BakeriesService {
-    constructor(@InjectModel(Bakery) private bakeryRepo: typeof Bakery) {}
+    constructor(@Inject('BAKERIES_REPOSITORY') private bakeryRepo: typeof Bakery) {}
 
     async create(dto: CreateBakeryDTO) {
         const bakery = await this.bakeryRepo.create(dto);

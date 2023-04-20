@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
 import { BakeriesController } from './bakeries.controller';
 import { BakeriesService } from './bakeries.service';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { Bakery } from './bakeries.model';
+import { DatabaseModule } from 'src/database.module';
+import { bakeryProviders } from './bakeries.providers';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Bakery])],
+  imports: [DatabaseModule],
   controllers: [BakeriesController],
-  providers: [BakeriesService]
+  providers: [
+    BakeriesService,
+    ...bakeryProviders
+  ]
 })
 export class BakeriesModule {}

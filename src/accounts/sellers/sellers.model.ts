@@ -10,29 +10,37 @@ interface SellerCreationAttrs {
 
     isReg: boolean;
 
-    activationCode: Array<number>;
+    verificationCode: number;
+    expirateCodeAt: number;
 }
 
 @Table({tableName: 'sellers'})
-export class Seller extends Model<Seller> {
-    @Column
+export class Seller extends Model<Seller, SellerCreationAttrs> {
+    @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
+    id: number;
+
+    @Column({type: DataType.STRING, allowNull: false, defaultValue: "Продавец"})
     name: string;
 
-    @Column
+    @Column({type: DataType.INTEGER, allowNull: false})
     phone: number;
 
-    @Column
+    @Column({type: DataType.STRING})
     email: string;
 
-    @Column
+    @Column({type: DataType.INTEGER, defaultValue: 0})
     balance: number;
 
-    @Column
+    @Column({type: DataType.BOOLEAN, defaultValue: false})
     isReg: boolean;
 
-    // @Column
-    // activationCode: Array<number>;
+    @Column({type: DataType.INTEGER})
+    verificationCode: number;
 
-    // @HasMany(() => Bakery)
-    // bakeries: Bakery[]
+    @Column({type: DataType.INTEGER})
+    expirateCodeAt: number
+
+    @HasMany(() => Bakery)
+    bakeries: Bakery[]
+
 }

@@ -43,13 +43,14 @@ export class Bakery extends Model<Bakery, BakeryCreationAttrs> {
     @Column({type: DataType.STRING, allowNull: false})
     address: string;
 
-    @HasMany(() => Product)
-    products: Product[]
+    // @HasMany(() => Product)
+    // products: Product[]
     
     @ForeignKey(() => Seller)
-    @Column({ field: 'SELLER_ID' })
+    @Column({ field: 'sellerId' })
     sellerId: number;
 
     @BelongsTo(() => Seller)
     seller: Seller
+    
 }

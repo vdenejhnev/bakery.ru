@@ -22,7 +22,8 @@ export const databaseProviders = [
             // Category, 
             // Bakery, 
             // User,
-            Seller
+            Seller,
+            Bakery,
         ]);
         await sequelize.sync();
         return sequelize;

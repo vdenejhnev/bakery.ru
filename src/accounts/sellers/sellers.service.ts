@@ -4,12 +4,19 @@ import { Bakery } from "src/bakeries/bakeries.model";
 
 @Injectable()
 export class SellersService {
-    constructor (
+    constructor(
         @Inject('SELLERS_REPOSITORY') private sellerRepo: typeof Seller,
-    ) {}
+    ) { }
 
     async getSellerById(id: number) {
-        return await this.sellerRepo.findByPk(id, { include: Bakery })
+        return await this.sellerRepo.findByPk(id, {
+            include: [
+                {
+                    model: Bakery,
+                    attributes: ['id', 'title']
+                }
+            ]
+        })
     }
 
     async getSellerByPhone(phone: number) {

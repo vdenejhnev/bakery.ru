@@ -21,7 +21,7 @@ import { SellersModule } from './accounts/sellers/sellers.module';
     ConfigModule.forRoot( {
         envFilePath: `.${process.env.NODE_ENV}`
     }),
-
+    AuthModule,
     BakeriesModule,
     SellersModule
   ],

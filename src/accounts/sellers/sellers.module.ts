@@ -6,13 +6,17 @@ import { Seller } from "./sellers.model";
 import { SellersController } from "./sellers.controller";
 import { SellersService } from "./sellers.service";
 import { DatabaseModule } from "src/database.module";
-import { databaseProviders } from "src/database.providers";
 import { sellersProviders } from "./sellers.providers";
-import { bakeryProviders } from "src/bakeries/bakeries.providers";
+import { JwtService } from "@nestjs/jwt";
 
 @Module({
   imports: [DatabaseModule],
   controllers: [SellersController],
-  providers: [SellersService, ...sellersProviders, ...bakeryProviders]
+  providers: [
+    JwtService,
+    SellersService, 
+    ...sellersProviders
+  ],
+  exports: [SellersService]
 })
 export class SellersModule { }

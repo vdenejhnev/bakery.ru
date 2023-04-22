@@ -6,11 +6,13 @@ import { SellersModule } from 'src/accounts/sellers/sellers.module';
 import { SellersService } from 'src/accounts/sellers/sellers.service';
 import { sellersProviders } from 'src/accounts/sellers/sellers.providers';
 import { DatabaseModule } from 'src/database.module';
+import { AdminsModule } from 'src/accounts/admins/admins.module';
+import { AdminsService } from 'src/accounts/admins/admins.service';
+import { AdminService } from './accounts/admin.seller';
+import { adminsProviders } from 'src/accounts/admins/admins.providers';
 
 @Module({
   imports: [
-    SellersModule,
-
     DatabaseModule,
     JwtModule.register({})
   ],
@@ -18,7 +20,11 @@ import { DatabaseModule } from 'src/database.module';
   providers: [
     SellersService,
     SellerService,
-    ...sellersProviders
+    ...sellersProviders,
+
+    AdminsService,
+    AdminService,
+    ...adminsProviders
   ]
 })
 export class AuthModule {}

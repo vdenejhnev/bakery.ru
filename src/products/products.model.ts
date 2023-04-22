@@ -1,11 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
 import { Bakery } from "src/bakeries/bakeries.model";
+import { Category } from "src/categories/categories.model";
 
 interface ProductCreationAttrs {
     title: string;
     price: number;
-    category: number;
+    category: any;
     bakery: number;
     image: string;
     description: string;
@@ -25,10 +26,6 @@ export class Product extends Model<Product, ProductCreationAttrs> {
     @Column({type: DataType.FLOAT, allowNull: false, defaultValue: 0.0})
     price: number;
 
-    @ApiProperty({example: '1', description: "ID категории"})
-    @Column({type: DataType.INTEGER, allowNull: false})
-    category: number;
-
     @ApiProperty({example: '/img/product_img.png', description: "Изображение товара"})
     @Column({type: DataType.STRING, allowNull: false, defaultValue: '/img/product_img.png'})
     image: string;
@@ -36,6 +33,14 @@ export class Product extends Model<Product, ProductCreationAttrs> {
     @ApiProperty({example: 'Очень вкусный багет с изюмом', description: "Описание товара"})
     @Column({type: DataType.TEXT, allowNull: false, defaultValue: ''})
     description: string;
+
+
+    @ForeignKey(() => Category)
+    @Column({ field: 'categoryId' })
+    categoryId: number;
+
+    @BelongsTo(() => Category)
+    category: Category
 
     
     @ForeignKey(() => Bakery)

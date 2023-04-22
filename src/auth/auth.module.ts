@@ -10,6 +10,9 @@ import { AdminsModule } from 'src/accounts/admins/admins.module';
 import { AdminsService } from 'src/accounts/admins/admins.service';
 import { AdminService } from './accounts/admin.seller';
 import { adminsProviders } from 'src/accounts/admins/admins.providers';
+import { UsersService } from 'src/accounts/users/users.service';
+import { UserService } from './accounts/user.seller';
+import { usersProviders } from 'src/accounts/users/users.providers';
 
 @Module({
   imports: [
@@ -18,6 +21,10 @@ import { adminsProviders } from 'src/accounts/admins/admins.providers';
   ],
   controllers: [AuthController],
   providers: [
+    UsersService,
+    UserService,
+    ...usersProviders,
+
     SellersService,
     SellerService,
     ...sellersProviders,

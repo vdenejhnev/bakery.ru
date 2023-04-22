@@ -22,7 +22,7 @@ export const databaseProviders = [
             // Product, 
             // Category, 
             // Bakery, 
-            // User,
+            User,
             Admin,
             Category,
             Product,

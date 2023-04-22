@@ -6,6 +6,7 @@ import { BakeriesModule } from './bakeries/bakeries.module';
 import { SellersModule } from './accounts/sellers/sellers.module';
 import { AdminsModule } from './accounts/admins/admins.module';
 import { CategoriesModule } from './categories/categories.module';
+import { UsersModule } from './accounts/users/users.module';
 
 
 @Module({
@@ -14,10 +15,12 @@ import { CategoriesModule } from './categories/categories.module';
         envFilePath: `.${process.env.NODE_ENV}`
     }),
     AuthModule,
+    
+    UsersModule,
     SellersModule,
     AdminsModule,
-    CategoriesModule,
 
+    CategoriesModule,
     BakeriesModule,
   ],
   

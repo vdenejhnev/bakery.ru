@@ -81,7 +81,10 @@ export class SellerService {
     }
 
     // generate tokens - access_token, refresh_token
-    async generateTokens(phone: number, id: number): Promise<any> {
+    async generateTokens(phone: number, id: number): Promise<{
+        access_token: string,
+        refresh_token: string
+    }> {
         const payload = { phone, id }
 
         const [at, rt] = await Promise.all([

@@ -39,7 +39,7 @@ export class Product extends Model<Product, ProductCreationAttrs> {
 
     
     @ForeignKey(() => Bakery)
-    @Column({ field: 'BAKERY_ID' })
+    @Column({ field: 'bakeryId' })
     bakeryId: number;
 
     @BelongsTo(() => Bakery)

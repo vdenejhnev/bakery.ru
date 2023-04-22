@@ -11,6 +11,10 @@ export class BakeriesService {
         const bakery = await this.bakeryRepo.create(dto);
         return bakery;
     }
+
+    async getAllBakeries(limit = 20, offset = 0) {
+        return await this.bakeryRepo.findAll({ limit, offset });
+    }
 /*
     async getProduct(id: number) {
         const product = await this.productRepo.findOne({

@@ -8,6 +8,12 @@ export class SellersService {
         @Inject('SELLERS_REPOSITORY') private sellerRepo: typeof Seller,
     ) { }
 
+    
+    async getAllSellers(limit = 20, offset = 0) {
+        return await this.sellerRepo.findAll({ limit, offset })
+    }
+
+
     async getSellerById(id: number) {
         return await this.sellerRepo.findByPk(id, {
             include: [

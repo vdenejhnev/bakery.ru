@@ -5,6 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { BakeriesModule } from './bakeries/bakeries.module';
 import { SellersModule } from './accounts/sellers/sellers.module';
 import { AdminsModule } from './accounts/admins/admins.module';
+import { CategoriesModule } from './categories/categories.module';
 
 
 @Module({
@@ -15,6 +16,7 @@ import { AdminsModule } from './accounts/admins/admins.module';
     AuthModule,
     SellersModule,
     AdminsModule,
+    CategoriesModule,
 
     BakeriesModule,
   ],

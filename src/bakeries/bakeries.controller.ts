@@ -16,4 +16,9 @@ export class BakeriesController {
     create(@Body() bakerydto: CreateBakeryDTO) {
         return this.bakeriesService.create(bakerydto);
     }
+
+    @Get('/getAll')
+    getAll() {
+        return this.bakeriesService.getAllBakeries();
+    }
 }

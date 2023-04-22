@@ -3,7 +3,7 @@ import { CreateProductDTO } from './dto/create-product.dto';
 import { ProductsService } from './products.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Product } from './products.model';
-import { AtSellerGuard } from 'src/common/guards/at.seller.guard';
+import { AtSellerGuard } from 'src/common/guards/seller/at.seller.guard';
 
 @ApiTags('Продукты')
 @Controller('products')

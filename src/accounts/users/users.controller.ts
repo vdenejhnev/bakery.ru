@@ -1,13 +1,22 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from './users.model';
 import { UsersService } from './users.service';
 import { CreateUserDTO } from './dto/create-user.dto';
+import { AuthUserGuard } from 'src/common/guards/user/auth.user.guard';
 
 @ApiTags('Пользователи')
 @Controller('users')
 export class UsersController {
     constructor(private usersService: UsersService) {}
+
+
+    @UseGuards(AuthUserGuard)
+    @Get('/me')
+    async getMe(@Req() req: any) {
+        return await this.usersService.getUserById(Number(req.seller.id))
+    }
+
 
     @ApiOperation({summary: "Создание пользователя"})
     @ApiResponse({status: 200, type: User})

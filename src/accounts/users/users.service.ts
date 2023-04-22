@@ -17,6 +17,10 @@ export class UsersService {
         return await this.userRepo.findAll({ include: { all: true } });
     }
 
+    async getUserById(id: number) {
+        return await this.userRepo.findByPk(id)
+    }
+
     async getUserByPhone(phone: string) {
         return await this.userRepo.findOne({ where: { phone }, include: { all: true } })
     }

@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 import { Product } from './products/products.model';
 import { Category } from './categories/categories.model';
-import { Bakery } from './bakeries/bakeries.model';
+import { Bakery } from './bakeries/models/bakeries.model';
 import { User } from './accounts/users/users.model';
 import { Seller } from './accounts/sellers/sellers.model';
 import { Admin } from './accounts/admins/admins.model';

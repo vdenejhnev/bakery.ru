@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Bakery } from './bakeries.model';
+import { Bakery } from './models/bakeries.model';
 import { CreateBakeryDTO } from './dto/create-bakery.dto';
 
 @Injectable()

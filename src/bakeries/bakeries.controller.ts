@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { BakeriesService } from './bakeries.service';
-import { Bakery } from './bakeries.model';
+import { Bakery } from './models/bakeries.model';
 import { CreateBakeryDTO } from './dto/create-bakery.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
@@ -13,9 +13,15 @@ export class BakeriesController {
     @ApiOperation({summary: "Создание пекарни"})
     @ApiResponse({status: 200, type: Bakery})
     @Post() 
-    create(@Body() bakerydto: CreateBakeryDTO) {
-        return this.bakeriesService.create(bakerydto);
+    async create(@Body() bakeryDto: CreateBakeryDTO) {
+        return await this.bakeriesService.create(bakeryDto);
     }
+
+    @Post()
+    async createApplicationForBakery(@Body() dto: any) {
+
+    }
+
 
     @Get('/getAll')
     getAll() {

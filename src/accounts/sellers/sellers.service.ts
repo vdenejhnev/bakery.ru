@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { Seller } from "./sellers.model";
-import { Bakery } from "src/bakeries/bakeries.model";
+import { Bakery } from "src/bakeries/models/bakeries.model";
 
 @Injectable()
 export class SellersService {

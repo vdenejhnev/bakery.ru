@@ -1,5 +1,5 @@
 import { BelongsTo, BelongsToMany, Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
-import { Bakery } from "src/bakeries/bakeries.model";
+import { Bakery } from "src/bakeries/models/bakeries.model";
 
 
 interface SellerCreationAttrs {

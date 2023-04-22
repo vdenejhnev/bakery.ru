@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { Bakery } from "src/bakeries/bakeries.model";
+import { Bakery } from "src/bakeries/models/bakeries.model";
 import { Category } from "src/categories/categories.model";
 
 interface ProductCreationAttrs {

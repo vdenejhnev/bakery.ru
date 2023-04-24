@@ -22,6 +22,12 @@ export class BakeriesController {
 
     }
 
+    @Get(':id')
+    async getOne(@Param() param: any) {
+        console.log(param)
+        return await this.bakeriesService.findById(Number(param?.id))
+    }
+
 
     @Get('/getAll')
     getAll() {

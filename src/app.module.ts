@@ -7,6 +7,7 @@ import { SellersModule } from './accounts/sellers/sellers.module';
 import { AdminsModule } from './accounts/admins/admins.module';
 import { CategoriesModule } from './categories/categories.module';
 import { UsersModule } from './accounts/users/users.module';
+import { ProductsModule } from './products/products.module';
 
 
 @Module({
@@ -20,6 +21,7 @@ import { UsersModule } from './accounts/users/users.module';
     SellersModule,
     AdminsModule,
 
+    ProductsModule,
     CategoriesModule,
     BakeriesModule,
   ],

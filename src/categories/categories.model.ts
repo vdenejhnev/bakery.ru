@@ -1,5 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { BelongsToMany, Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { MenuCategories } from "src/bakeries/models/menu-categories";
+import { Menu } from "src/bakeries/models/menu.model";
 import { Product } from "src/products/products.model";
 
 interface CategoryCreationAttrs {
@@ -28,4 +30,7 @@ export class Category extends Model<Category, CategoryCreationAttrs> {
 
     @HasMany(() => Product)
     products: Product[]
+
+    @BelongsToMany(() => Menu, () => MenuCategories)
+    menu: Menu[];
 }

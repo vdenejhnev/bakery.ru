@@ -29,6 +29,15 @@ export class ProductsService {
         return products;
     }
 
+    async findByBakeryAndCategory(bakeryId: number, categoryId: number) {
+        return await this.productRepo.findAll({
+            where: {
+                bakeryId,
+                categoryId
+            }
+        });
+    }
+
     async findByCategory(category: number) {
         const products = await this.productRepo.findAll({
             where: {

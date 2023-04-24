@@ -15,6 +15,10 @@ export class BakeriesService {
     async getAllBakeries(limit = 20, offset = 0) {
         return await this.bakeryRepo.findAll({ limit, offset });
     }
+
+    async findById(id: number) {
+        return await this.bakeryRepo.findByPk(id)
+    }
 /*
     async getProduct(id: number) {
         const product = await this.productRepo.findOne({

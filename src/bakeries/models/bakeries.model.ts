@@ -2,6 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
 import { Seller } from "src/accounts/sellers/sellers.model";
 import { Product } from "src/products/products.model";
+import { Menu } from "./menu.model";
 
 interface BakeryCreationAttrs {
     title: string;
@@ -43,14 +44,23 @@ export class Bakery extends Model<Bakery, BakeryCreationAttrs> {
     @Column({type: DataType.STRING, allowNull: false})
     address: string;
 
-    // @HasMany(() => Product)
-    // products: Product[]
+
+    @HasMany(() => Product)
+    products: Product[]
+
     
+    @ForeignKey(() => Menu)
+    @Column({ field: 'menuId' })
+    menuId: number;
+
+    @BelongsTo(() => Menu)
+    menu: Menu
+    
+
     @ForeignKey(() => Seller)
     @Column({ field: 'sellerId' })
     sellerId: number;
 
     @BelongsTo(() => Seller)
     seller: Seller
-    
 }

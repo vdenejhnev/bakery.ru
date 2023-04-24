@@ -14,7 +14,7 @@ export class UsersController {
     @UseGuards(AuthUserGuard)
     @Get('/me')
     async getMe(@Req() req: any) {
-        return await this.usersService.getUserById(Number(req.seller.id))
+        return await this.usersService.getUserById(Number(req.user.id))
     }
 
 

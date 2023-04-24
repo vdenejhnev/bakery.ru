@@ -33,6 +33,11 @@ export class ProductsController {
         return this.productsService.getAllProducts();
     }
 
+    @Get('/getByBakeryAndCategory/:bakery/:category')
+    findByBakeryAndCategory(@Param() param: any) {
+        return this.productsService.findByBakeryAndCategory(Number(param?.bakery), Number(param?.category));
+    }
+
     @ApiOperation({summary: "Вывод всех продуктов указанной категории"})
     @ApiResponse({status: 200, type: [Product]})
     @Get('/getByCategory/:category')

@@ -5,11 +5,14 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { Product } from './products.model';
 import { DatabaseModule } from 'src/database.module';
 import { productsProviders } from './products.providers';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [DatabaseModule],
   controllers: [ProductsController],
   providers: [
+    JwtService,
+
     ProductsService,
     ...productsProviders
   ]

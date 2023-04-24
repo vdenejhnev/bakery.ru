@@ -5,6 +5,8 @@ import { Bakery } from './bakeries/models/bakeries.model';
 import { User } from './accounts/users/users.model';
 import { Seller } from './accounts/sellers/sellers.model';
 import { Admin } from './accounts/admins/admins.model';
+import { Menu } from './bakeries/models/menu.model';
+import { MenuCategories } from './bakeries/models/menu-categories';
 
 export const databaseProviders = [
     {
@@ -22,6 +24,8 @@ export const databaseProviders = [
             // Product, 
             // Category, 
             // Bakery, 
+            MenuCategories,
+            Menu,
             User,
             Admin,
             Category,

@@ -5,8 +5,7 @@ import { Bakery } from './bakeries/models/bakeries.model';
 import { User } from './accounts/users/users.model';
 import { Seller } from './accounts/sellers/sellers.model';
 import { Admin } from './accounts/admins/admins.model';
-import { Menu } from './bakeries/models/menu.model';
-import { MenuCategories } from './bakeries/models/menu-categories';
+import { ApplicationsForBakeries } from './bakeries/models/applications-for-bakeries.model';
 
 export const databaseProviders = [
     {
@@ -21,20 +20,17 @@ export const databaseProviders = [
           database: 'default_db',
         });
         sequelize.addModels([
-            // Product, 
-            // Category, 
-            // Bakery, 
-            MenuCategories,
-            Menu,
             User,
             Admin,
             Category,
             Product,
             Seller,
             Bakery,
+            ApplicationsForBakeries
         ]);
         await sequelize.sync();
         return sequelize;
       },
     },
+    
   ];

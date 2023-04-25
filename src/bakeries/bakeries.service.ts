@@ -2,14 +2,25 @@ import { Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Bakery } from './models/bakeries.model';
 import { CreateBakeryDTO } from './dto/create-bakery.dto';
+import { ApplicationsForBakeries } from './models/applications-for-bakeries.model';
 
 @Injectable()
 export class BakeriesService {
-    constructor(@Inject('BAKERIES_REPOSITORY') private bakeryRepo: typeof Bakery) {}
+    constructor(
+        @Inject('BAKERIES_REPOSITORY') private bakeryRepo: typeof Bakery,
+        @Inject('APPLICATIONS-FOR-BAKERIES_REPOSITORY') private bakeryReq: typeof ApplicationsForBakeries
+    ) {}
 
-    async create(dto: CreateBakeryDTO) {
+    async createApplicationForBakery(dto: any) {
+        return await this.bakeryReq.create(dto)
+    }
+
+    async getRequestsForBakery(limit = 20, offset = 0) {
+        return await this.bakeryReq.findAll({ limit, offset })
+    }
+
+    async create(dto: any) {
         const bakery = await this.bakeryRepo.create(dto);
-        return bakery;
     }
 
     async getAllBakeries(limit = 20, offset = 0) {

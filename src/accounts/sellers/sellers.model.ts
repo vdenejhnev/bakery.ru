@@ -14,30 +14,30 @@ interface SellerCreationAttrs {
     expirateCodeAt: number;
 }
 
-@Table({tableName: 'sellers'})
+@Table({ tableName: 'sellers' })
 export class Seller extends Model<Seller, SellerCreationAttrs> {
-    @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
+    @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
     id: number;
 
-    @Column({type: DataType.STRING, allowNull: false, defaultValue: "Продавец"})
+    @Column({ type: DataType.STRING, allowNull: false, defaultValue: "Продавец" })
     name: string;
 
-    @Column({type: DataType.INTEGER, allowNull: false})
+    @Column({ type: DataType.INTEGER, allowNull: false })
     phone: number;
 
-    @Column({type: DataType.STRING})
+    @Column({ type: DataType.STRING, allowNull: false, defaultValue: "" })
     email: string;
 
-    @Column({type: DataType.INTEGER, defaultValue: 0})
+    @Column({ type: DataType.INTEGER, defaultValue: 0 })
     balance: number;
 
-    @Column({type: DataType.BOOLEAN, defaultValue: false})
+    @Column({ type: DataType.BOOLEAN, defaultValue: false })
     isReg: boolean;
 
-    @Column({type: DataType.INTEGER})
+    @Column({ type: DataType.INTEGER, defaultValue: null })
     verificationCode: number;
 
-    @Column({type: DataType.INTEGER})
+    @Column({ type: DataType.INTEGER, defaultValue: null })
     expirateCodeAt: number
 
     @HasMany(() => Bakery)

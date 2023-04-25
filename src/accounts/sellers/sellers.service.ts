@@ -32,4 +32,12 @@ export class SellersService {
     async create(data: any) {
         return await this.sellerRepo.create(data)
     }
+
+    async update(id: number, data: any) {
+        return await this.sellerRepo.update(data, {
+            where: {
+                id
+            }
+        })
+    }
 }

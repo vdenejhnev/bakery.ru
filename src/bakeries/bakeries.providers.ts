@@ -9,5 +9,5 @@ export const bakeryProviders = [
   {
     provide: 'APPLICATIONS-FOR-BAKERIES_REPOSITORY',
     useValue: ApplicationsForBakeries,
-  },
+  }
 ];

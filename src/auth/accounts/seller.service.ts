@@ -17,7 +17,15 @@ export class SellerService {
         const sms_code = generateSmsCode()
         const timestamp = new Date().getTime()
 
+        console.log(sms_code)
+        console.log(timestamp)
+
         if (exist_seller) {
+            await this.sellersService.update(exist_seller.id, {
+                verificationCode: sms_code,
+                expirateCodeAt: timestamp
+            })
+            return
             // step 1. update the current seller field -> activationCode = [sms_code, timestamp]
 
             // step 2. send sms code to phone number
@@ -25,9 +33,16 @@ export class SellerService {
             // step 3. return
         }
 
+        await this.sellersService.create({
+            phone,
+            verificationCode: sms_code,
+            expirateCodeAt: timestamp
+        })
+
+        return
 
         // step 1. if there is no current user, then register a new one with empty fields and -> "isReg = false", "activationCode = [sms_code, timestamp]"
-   
+
         // step 2. send sms code to phone number
     }
 
@@ -61,7 +76,7 @@ export class SellerService {
             // step 2. generate tokens and send
 
         }
-        
+
         throw new HttpException('Вы уже зарегистрированы', HttpStatus.BAD_REQUEST)
     }
 

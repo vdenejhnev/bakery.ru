@@ -14,11 +14,11 @@ export class AuthController {
         private readonly sellerService: SellerService
     ) { }
 
-    // // endpoints for seller
-    // @Post('seller/get-sms')
-    // async sendSellerSms(@Body() body: any) {
-    //     return await this.sellerService.sendSms(body.phone)
-    // }
+    // endpoints for seller
+    @Post('seller/get-sms')
+    async sendSellerSms(@Body() body: any) {
+        return await this.sellerService.sendSms(body.phone)
+    }
 
     // @Post('seller/check-sms')
     // async checkSellerSms(@Body() body: any) {

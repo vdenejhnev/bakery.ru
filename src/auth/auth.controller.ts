@@ -20,10 +20,10 @@ export class AuthController {
         return await this.sellerService.sendSms(body.phone)
     }
 
-    // @Post('seller/check-sms')
-    // async checkSellerSms(@Body() body: any) {
-    //     return await this.sellerService.checkSms(body.phone, body.code)
-    // }
+    @Post('seller/check-sms')
+    async checkSellerSms(@Body() body: any) {
+        return await this.sellerService.checkSms(body.phone, body.code)
+    }
 
     // @Post('seller/registration')
     // async sellerReg(@Body() body: any) {
@@ -34,7 +34,7 @@ export class AuthController {
     @UseGuards(RtSellerGuard)
     @Get('seller/refresh')
     async refreshSeller(@Req() req: any) {
-        return await this.sellerService.refreshTokens(Number(req.seller.phone), Number(req.seller.id))
+        return await this.sellerService.refreshTokens(req.seller.phone, Number(req.seller.id))
     }
 
 }

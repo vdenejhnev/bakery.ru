@@ -3,9 +3,12 @@ import { Product } from './products/products.model';
 import { Category } from './categories/categories.model';
 import { Bakery } from './bakeries/models/bakeries.model';
 import { User } from './accounts/users/users.model';
-import { Seller } from './accounts/sellers/sellers.model';
+import { Seller } from './accounts/sellers/models/sellers.model';
 import { Admin } from './accounts/admins/admins.model';
 import { ApplicationsForBakeries } from './bakeries/models/applications-for-bakeries.model';
+import { RequestMoney } from './accounts/sellers/models/request-money.model';
+import { Menu } from './menu/models/menu.model';
+import { MenuCategories } from './menu/models/menu-categories.model';
 
 export const databaseProviders = [
     {
@@ -25,7 +28,10 @@ export const databaseProviders = [
             Category,
             Product,
             Seller,
+            RequestMoney,
             Bakery,
+            Menu,
+            MenuCategories,
             ApplicationsForBakeries
         ]);
         await sequelize.sync();

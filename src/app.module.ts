@@ -9,6 +9,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { UsersModule } from './accounts/users/users.module';
 import { ProductsModule } from './products/products.module';
 import { FilesModule } from './files/files.module';
+import { MenuModule } from './menu/menu.module';
 
 
 @Module({
@@ -25,6 +26,7 @@ import { FilesModule } from './files/files.module';
     ProductsModule,
     CategoriesModule,
     BakeriesModule,
+    MenuModule,
 
     FilesModule,
   ],

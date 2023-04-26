@@ -11,14 +11,12 @@ export class SellerService {
     ) { }
 
     // send sms code to phone number
-    async sendSms(phone: number) {
+    async sendSms(phone: string) {
         const exist_seller = await this.sellersService.getSellerByPhone(phone)
 
         const sms_code = generateSmsCode()
         const timestamp = new Date().getTime()
 
-        console.log(sms_code)
-        console.log(timestamp)
 
         if (exist_seller) {
             await this.sellersService.update(exist_seller.id, {
@@ -39,46 +37,48 @@ export class SellerService {
             expirateCodeAt: timestamp
         })
 
-        return
-
         // step 1. if there is no current user, then register a new one with empty fields and -> "isReg = false", "activationCode = [sms_code, timestamp]"
 
         // step 2. send sms code to phone number
     }
 
     // verification of sent SMS code
-    async checkSms(phone: number, smsCode: number) {
+    async checkSms(phone: string, smsCode: number) {
         const exist_seller = await this.sellersService.getSellerByPhone(phone)
 
         const now_timestamp = new Date().getTime()
 
-        // check the entered SMS code with the previously sent one && check if the time has passed from the moment of sending to the moment of entering < 2 minutes
-        // if (Number(smsCode) === Number(exist_seller.activationCode[0]) && Math.floor((now_timestamp - Number(exist_seller.activationCode[1])) / (60 * 1000)) < 2) {
-        //     // if isReg === true -> it means the user is already registered and we send him tokens
-        //     if (exist_seller.isReg) {
-        //         return await this.generateTokens(exist_seller.phone, exist_seller.id)
-        //     }
-        //     // not registered
-        //     return {
-        //         isReg: false
-        //     }
-        // }
-    }
 
-    // account registration
-    async registration(dto: any) {
-        const exist_seller = await this.sellersService.getSellerByPhone(dto.phone)
+        if (exist_seller) {
 
-        if (!exist_seller.isReg) {
-
-            // step 1. availability of data for registration and updating in the database
-
-            // step 2. generate tokens and send
+            if (
+                Number(smsCode) === Number(exist_seller.verificationCode)
+                && Math.floor((now_timestamp - Number(exist_seller.expirateCodeAt)) / (60 * 1000)) < 2
+            ) {
+                return await this.generateTokens(exist_seller.phone, exist_seller.id)
+            }
 
         }
 
-        throw new HttpException('Вы уже зарегистрированы', HttpStatus.BAD_REQUEST)
+
+        throw new HttpException('Данный телефон не зарегистрирован', HttpStatus.BAD_REQUEST)
+
     }
+
+    // account registration
+    // async registration(dto: any) {
+    //     const exist_seller = await this.sellersService.getSellerByPhone(dto.phone)
+
+    //     if (!exist_seller.isReg) {
+
+    //         // step 1. availability of data for registration and updating in the database
+
+    //         // step 2. generate tokens and send
+
+    //     }
+
+    //     throw new HttpException('Вы уже зарегистрированы', HttpStatus.BAD_REQUEST)
+    // }
 
 
 
@@ -91,12 +91,12 @@ export class SellerService {
     }
 
     // refresh tokens - access_token, refresh_token
-    async refreshTokens(phone: number, id: number): Promise<any> {
+    async refreshTokens(phone: string, id: number): Promise<any> {
         return await this.generateTokens(phone, id)
     }
 
     // generate tokens - access_token, refresh_token
-    async generateTokens(phone: number, id: number): Promise<{
+    async generateTokens(phone: string, id: number): Promise<{
         access_token: string,
         refresh_token: string
     }> {

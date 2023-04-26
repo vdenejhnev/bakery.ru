@@ -1,19 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
 import { Seller } from "src/accounts/sellers/models/sellers.model";
-import { Category } from "src/categories/categories.model";
+import { FeedbackOrder } from "src/feedbacks/models/feedbacks-order.model";
+import { FeedbackProduct } from "src/feedbacks/models/feedbacks-product.model";
 import { Menu } from "src/menu/models/menu.model";
 import { Product } from "src/products/products.model";
 
-interface BakeryCreationAttrs {
-    title: string;
-    image: string;
-    description: string;
-    phone: string;
-    email: string;
-    address: string;
-    owner: number;
-}
+
 
 @Table({tableName: 'bakeries'})
 export class Bakery extends Model<Bakery> {
@@ -45,9 +38,14 @@ export class Bakery extends Model<Bakery> {
     @Column({type: DataType.STRING, allowNull: false})
     address: string;
 
+    @HasMany(() => FeedbackOrder)
+    feedbacksOrders: FeedbackOrder[]
+
+    @HasMany(() => FeedbackProduct)
+    feedbacksProducts: FeedbackProduct[]
+
     @HasMany(() => Product)
     products: Product[]
-
 
     @ForeignKey(() => Menu)
     @Column({ field: 'menuId' })

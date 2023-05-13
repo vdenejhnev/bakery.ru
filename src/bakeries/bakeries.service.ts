@@ -4,12 +4,14 @@ import { Bakery } from './models/bakeries.model';
 import { CreateBakeryDTO } from './dto/create-bakery.dto';
 import { ApplicationsForBakeries } from './models/applications-for-bakeries.model';
 import { types } from 'util';
+import { CategoriesService } from 'src/categories/categories.service';
 
 @Injectable()
 export class BakeriesService {
     constructor(
         @Inject('BAKERIES_REPOSITORY') private bakeryRepo: typeof Bakery,
-        @Inject('APPLICATIONS-FOR-BAKERIES_REPOSITORY') private bakeryReq: typeof ApplicationsForBakeries
+        @Inject('APPLICATIONS-FOR-BAKERIES_REPOSITORY') private bakeryReq: typeof ApplicationsForBakeries,
+        private categoriesService: CategoriesService
     ) { }
 
     async createApplicationForBakery(dto: any) {
@@ -29,11 +31,13 @@ export class BakeriesService {
     }
 
     async getMenu(id: any) {
-        return await this.bakeryRepo.findOne({
+        const bakery = await this.bakeryRepo.findOne({
             where: {
                 id
             }
-        }).then((r: any) => r.menu ?? [])
+        })
+
+        return await this.categoriesService.getAllCategoriesForMenu(bakery.menu)
     }
 
     async addCategoryToMenu(bakeryId: any, categoryId: any) {

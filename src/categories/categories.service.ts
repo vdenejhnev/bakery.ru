@@ -7,6 +7,8 @@ import { CreateCategoryDTO } from './dto/create-category.dto';
 export class CategoriesService {
     constructor(@Inject('CATEGORIES_REPOSITORY') private categoryRepo: typeof Category) {}
 
+
+
     async create(dto: CreateCategoryDTO) {
         const category = await this.categoryRepo.create(dto);
         return category;
@@ -25,6 +27,14 @@ export class CategoriesService {
     async getAllCategories() {
         const categories = await this.categoryRepo.findAll();
         return categories;
+    }
+
+    async getAllCategoriesForMenu(categoriesId: any) {
+        return await this.categoryRepo.findAll({
+            where: {
+                id: categoriesId
+            }
+        })
     }
 
     async delete(id: number) {

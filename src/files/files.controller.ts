@@ -11,10 +11,10 @@ export class FilesController {
         private filesService: FilesService,
     ) { }
 
-    @UseGuards(AuthUserGuard || AtSellerGuard || AtAdminGuard)
+    // @UseGuards(AuthUserGuard || AtSellerGuard || AtAdminGuard)
     @Post('upload/image')
     @UseInterceptors(FileInterceptor('file'))
-    uploadImage(@UploadedFile(
+    async uploadImage(@UploadedFile(
         new ParseFilePipe({
             validators: [
                 new FileTypeValidator({ fileType: '.(png|jpeg|jpg)' }),
@@ -22,7 +22,8 @@ export class FilesController {
             ],
         }),
     ) file: any) {
-        return this.filesService.writeImage(file)
+        console.log('log')
+        return await this.filesService.writeImage(file)
     }
     
 

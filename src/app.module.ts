@@ -1,42 +1,34 @@
 import { Module } from '@nestjs/common';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { ProductsModule } from './products/products.module';
 import { ConfigModule } from '@nestjs/config';
-import { Product } from './products/products.model';
-import { RolesModule } from './roles/roles.module';
-import { Role } from './roles/roles.model';
-import { UsersModule } from './users/users.module';
-import { User } from './users/users.model';
-import { UserRoles } from './roles/user-roles.model';
+// modules
 import { AuthModule } from './auth/auth.module';
-import { CategoriesModule } from './categories/categories.module';
-import { Category } from './categories/categories.model';
 import { BakeriesModule } from './bakeries/bakeries.module';
-import { Bakery } from './bakeries/bakeries.model';
+import { SellersModule } from './accounts/sellers/sellers.module';
+import { AdminsModule } from './accounts/admins/admins.module';
+import { CategoriesModule } from './categories/categories.module';
+import { UsersModule } from './accounts/users/users.module';
+import { ProductsModule } from './products/products.module';
+import { FilesModule } from './files/files.module';
 
 
 @Module({
   imports: [
-    ConfigModule.forRoot( {
+    ConfigModule.forRoot({
         envFilePath: `.${process.env.NODE_ENV}`
     }),
-    SequelizeModule.forRoot({
-      dialect: 'mysql',
-      host: process.env.DB_HOST,
-      port: Number(process.env.DB_PORT),
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      models: [Product, Category, Bakery, Role, User, UserRoles],
-      autoLoadModels: true,
-    }),
-    ProductsModule,
-    RolesModule,
-    UsersModule,
     AuthModule,
+    
+    UsersModule,
+    SellersModule,
+    AdminsModule,
+
+    ProductsModule,
     CategoriesModule,
     BakeriesModule,
+
+    FilesModule,
   ],
+  
   controllers: [],
   providers: []
 })

@@ -1,6 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Product } from './products.model';
-import { InjectModel } from '@nestjs/sequelize';
 import { CreateProductDTO } from './dto/create-product.dto';
 import { Op } from 'sequelize';
 
@@ -9,7 +8,7 @@ import { Op } from 'sequelize';
 
 @Injectable()
 export class ProductsService {
-    constructor(@InjectModel(Product) private productRepo: typeof Product) {}
+    constructor(@Inject('PRODUCTS_REPOSITORY') private productRepo: typeof Product) {}
 
     async createProduct(dto: CreateProductDTO) {
         const product = await this.productRepo.create(dto);
@@ -25,9 +24,18 @@ export class ProductsService {
         return product;
     }
 
-    async getAllProducts() {
-        const products = await this.productRepo.findAll();
+    async getAllProducts(limit = 20, offset = 0 ) {
+        const products = await this.productRepo.findAll({ limit, offset });
         return products;
+    }
+
+    async findByBakeryAndCategory(bakeryId: number, categoryId: number) {
+        return await this.productRepo.findAll({
+            where: {
+                bakeryId,
+                categoryId
+            }
+        });
     }
 
     async findByCategory(category: number) {

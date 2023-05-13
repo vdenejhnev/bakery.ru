@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { CreateProductDTO } from './dto/create-product.dto';
 import { ProductsService } from './products.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Product } from './products.model';
+import { AtSellerGuard } from 'src/common/guards/seller/at.seller.guard';
 
 @ApiTags('Продукты')
 @Controller('products')
@@ -12,6 +13,7 @@ export class ProductsController {
 
     @ApiOperation({summary: "Создание продукта"})
     @ApiResponse({status: 200, type: Product})
+    @UseGuards(AtSellerGuard)
     @Post() 
     create(@Body() productdto: CreateProductDTO) {
         return this.productsService.createProduct(productdto);
@@ -29,6 +31,11 @@ export class ProductsController {
     @Get('/getAll')
     getAll() {
         return this.productsService.getAllProducts();
+    }
+
+    @Get('/getByBakeryAndCategory/:bakery/:category')
+    findByBakeryAndCategory(@Param() param: any) {
+        return this.productsService.findByBakeryAndCategory(Number(param?.bakery), Number(param?.category));
     }
 
     @ApiOperation({summary: "Вывод всех продуктов указанной категории"})
@@ -54,6 +61,7 @@ export class ProductsController {
 
     @ApiOperation({summary: "Удалить продукт по ID"})
     @ApiResponse({status: 200})
+    @UseGuards(AtSellerGuard)
     @Delete('/delete/:id')
     delete(@Param('id') id: number) {
         return this.productsService.delete(id);

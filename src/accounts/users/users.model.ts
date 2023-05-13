@@ -33,4 +33,7 @@ export class User extends Model<User, UserCreationAttrs> {
     @ApiProperty({example: 'Вячеслав', description: "Email пользователя"})
     @Column({type: DataType.STRING})
     email: string;
+
+    @Column({type: DataType.BOOLEAN, allowNull: false, defaultValue: false})
+    isReg: boolean;
 }

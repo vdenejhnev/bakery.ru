@@ -12,7 +12,7 @@ export class SellerService {
 
     // send sms code to phone number
     async sendSms(phone: string) {
-        const exist_seller = await this.sellersService.getSellerByPhone(phone)
+        const exist_seller = await this.sellersService.getSellerByPhone(phone.toString())
 
         const sms_code = generateSmsCode()
         const timestamp = new Date().getTime()
@@ -44,7 +44,7 @@ export class SellerService {
 
     // verification of sent SMS code
     async checkSms(phone: string, smsCode: number) {
-        const exist_seller = await this.sellersService.getSellerByPhone(phone)
+        const exist_seller = await this.sellersService.getSellerByPhone(phone.toString())
 
         const now_timestamp = new Date().getTime()
 

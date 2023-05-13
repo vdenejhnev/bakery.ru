@@ -7,21 +7,22 @@ import { Seller } from './accounts/sellers/models/sellers.model';
 import { Admin } from './accounts/admins/admins.model';
 import { ApplicationsForBakeries } from './bakeries/models/applications-for-bakeries.model';
 import { RequestMoney } from './accounts/sellers/models/request-money.model';
-import { Menu } from './menu/models/menu.model';
-import { MenuCategories } from './menu/models/menu-categories.model';
+import { FeedbackOrder } from './feedbacks/models/feedbacks-order.model';
+import { FeedbackProduct } from './feedbacks/models/feedbacks-product.model';
 
 export const databaseProviders = [
     {
       provide: 'SEQUELIZE',
       useFactory: async () => {
         const sequelize = new Sequelize({
-          dialect: 'mysql',
-          host: '92.51.39.249',
-          port: 3306,
+          dialect: 'postgres',
+          host: '80.90.185.15',
+          port: 5432,
           username: 'gen_user',
-          password: 'n3bpiirpr6',
+          password: 'g240uix0r6',
           database: 'default_db',
         });
+        
         sequelize.addModels([
             User,
             Admin,
@@ -29,9 +30,9 @@ export const databaseProviders = [
             Product,
             Seller,
             RequestMoney,
+            FeedbackOrder,
+            FeedbackProduct,
             Bakery,
-            Menu,
-            MenuCategories,
             ApplicationsForBakeries
         ]);
         await sequelize.sync();

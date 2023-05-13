@@ -3,7 +3,6 @@ import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "
 import { Seller } from "src/accounts/sellers/models/sellers.model";
 import { FeedbackOrder } from "src/feedbacks/models/feedbacks-order.model";
 import { FeedbackProduct } from "src/feedbacks/models/feedbacks-product.model";
-import { Menu } from "src/menu/models/menu.model";
 import { Product } from "src/products/products.model";
 
 
@@ -47,13 +46,8 @@ export class Bakery extends Model<Bakery> {
     @HasMany(() => Product)
     products: Product[]
 
-    @ForeignKey(() => Menu)
-    @Column({ field: 'menuId' })
-    menuId: number;
-
-    @BelongsTo(() => Menu)
-    menu: Menu
-    
+    @Column({type: DataType.ARRAY(DataType.INTEGER), allowNull: true})
+    menu: Array<number>
     
     @ForeignKey(() => Seller)
     @Column({ field: 'sellerId' })

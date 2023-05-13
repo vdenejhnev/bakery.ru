@@ -38,10 +38,12 @@ export class SellersService {
     }
 
     async getSellerByPhone(phone: string) {
+        console.log(typeof phone)
         return await this.sellerRepo.findOne({ where: { phone } })
     }
 
     async create(data: any) {
+        console.log(typeof data.phone)
         return await this.sellerRepo.create(data)
     }
 

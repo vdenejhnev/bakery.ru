@@ -30,7 +30,7 @@ export class ProductsController {
     @ApiResponse({status: 200, type: [Product]})
     @Get('getAll')
     getAll(@Query() query: any) {
-        return this.productsService.getAllProducts(query.limit, query.offset);  
+        return this.productsService.getAllProducts(query.categoryId, query.limit, query.offset);  
     }
 
    

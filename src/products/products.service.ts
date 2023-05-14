@@ -23,8 +23,12 @@ export class ProductsService {
         return product;
     }
 
-    async getAllProducts(limit = 20, offset = 0) {
-        return await this.productRepo.findAll({ limit, offset });
+    async getAllProducts(categoryId = null, limit = 20, offset = 0) {
+        return await this.productRepo.findAll({ 
+            
+            limit, 
+            offset 
+        });
     }
 
     async findByBakeryAndCategory(bakeryId: number, categoryId: number) {

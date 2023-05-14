@@ -1,10 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
-import { Bakery } from './models/bakeries.model';
-import { CreateBakeryDTO } from './dto/create-bakery.dto';
 import { ApplicationsForBakeries } from './models/applications-for-bakeries.model';
-import { types } from 'util';
 import { CategoriesService } from 'src/categories/categories.service';
+import { Op } from 'sequelize';
+import { Bakery } from './models/bakeries.model';
 
 @Injectable()
 export class BakeriesService {
@@ -27,7 +25,13 @@ export class BakeriesService {
     }
 
     async getAllBakeries(limit = 20, offset = 0) {
-        return await this.bakeryRepo.findAll({ limit, offset });
+        // return await this.bakeryRepo.findAll({
+        //     where: {
+        //        menu: {
+        //         [Op.in]: 1
+        //        }
+        //     }, limit, offset
+        // });
     }
 
     async getMenu(id: any) {

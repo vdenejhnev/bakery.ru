@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { BakeriesService } from './bakeries.service';
 import { Bakery } from './models/bakeries.model';
 import { CreateBakeryDTO } from './dto/create-bakery.dto';
@@ -34,8 +34,8 @@ export class BakeriesController {
     }
 
 
-    @Get('getAll/')
-    async getAll() {
+    @Get('getAll')
+    async getAll(@Query() query: any) {
         return await this.bakeriesService.getAllBakeries();
     }
 

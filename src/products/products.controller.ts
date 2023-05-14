@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { CreateProductDTO } from './dto/create-product.dto';
 import { ProductsService } from './products.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -21,40 +21,42 @@ export class ProductsController {
 
     @ApiOperation({summary: "Вывод продукта по ID"})
     @ApiResponse({status: 200, type: Product})
-    @Get('/get/:id')
+    @Get('get/:id')
     get(@Param('id') id: number) {
         return this.productsService.getProduct(id);
     }
 
     @ApiOperation({summary: "Вывод всех продуктов"})
     @ApiResponse({status: 200, type: [Product]})
-    @Get('/getAll')
-    getAll() {
-        return this.productsService.getAllProducts();
+    @Get('getAll')
+    getAll(@Query() query: any) {
+        return this.productsService.getAllProducts(query.limit, query.offset);  
     }
 
-    @Get('/getByBakeryAndCategory/:bakery/:category')
-    findByBakeryAndCategory(@Param() param: any) {
-        return this.productsService.findByBakeryAndCategory(Number(param?.bakery), Number(param?.category));
-    }
+   
 
     @ApiOperation({summary: "Вывод всех продуктов указанной категории"})
     @ApiResponse({status: 200, type: [Product]})
-    @Get('/getByCategory/:category')
-    findByCategory(@Param('category') category: number) {
-        return this.productsService.findByCategory(category);
+    @Get('getByCategory/:category')
+    findByCategory(@Param('category') category: number, @Query() query: any) {
+        return this.productsService.findByCategory(category, query.limit, query.offset);
     }
 
     @ApiOperation({summary: "Вывод всех продуктов указанной пекарни"})
     @ApiResponse({status: 200, type: [Product]})
-    @Get('/getByBakery/:bakery')
-    findByBakery(@Param('bakery') bakery: number) {
-        return this.productsService.findByBakery(bakery);
+    @Get('getByBakery/:bakeryId')
+    findByBakery(@Param('bakeryId') bakeryId: number, @Query() query: any) {
+        return this.productsService.findByBakery(bakeryId, query.limit, query.offset);
+    }
+
+    @Get('getByBakeryAndCategory/:bakeryId/:categoryId')
+    findByBakeryAndCategory(@Param() param: any) {
+        return this.productsService.findByBakeryAndCategory(Number(param?.bakeryId), Number(param?.categoryId));
     }
 
     @ApiOperation({summary: "Вывод всех продуктов по указанному названию"})
     @ApiResponse({status: 200, type: [Product]})
-    @Get('/getByTitle/:value')
+    @Get('getByTitle/:value')
     findByTitle(@Param('value') value: string) {
         return this.productsService.findByTitle(value);
     }
@@ -62,7 +64,7 @@ export class ProductsController {
     @ApiOperation({summary: "Удалить продукт по ID"})
     @ApiResponse({status: 200})
     @UseGuards(AtSellerGuard)
-    @Delete('/delete/:id')
+    @Delete('delete/:id')
     delete(@Param('id') id: number) {
         return this.productsService.delete(id);
     }

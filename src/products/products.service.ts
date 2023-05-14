@@ -11,8 +11,7 @@ export class ProductsService {
     constructor(@Inject('PRODUCTS_REPOSITORY') private productRepo: typeof Product) {}
 
     async createProduct(dto: CreateProductDTO) {
-        const product = await this.productRepo.create(dto);
-        return product;
+        return await this.productRepo.create(dto);
     }
 
     async getProduct(id: number) {
@@ -24,9 +23,8 @@ export class ProductsService {
         return product;
     }
 
-    async getAllProducts(limit = 20, offset = 0 ) {
-        const products = await this.productRepo.findAll({ limit, offset });
-        return products;
+    async getAllProducts(limit = 20, offset = 0) {
+        return await this.productRepo.findAll({ limit, offset });
     }
 
     async findByBakeryAndCategory(bakeryId: number, categoryId: number) {
@@ -38,20 +36,25 @@ export class ProductsService {
         });
     }
 
-    async findByCategory(category: number) {
+    async findByCategory(category: number, limit = 20, offset = 0) {
         const products = await this.productRepo.findAll({
             where: {
                 category: category
-            }
+            },
+            limit,
+            offset,
         });
         return products;
     }
 
-    async findByBakery(bakery: number) {
+    async findByBakery(bakery: number, limit = 20, offset = 0) {
         const products = await this.productRepo.findAll({
             where: {
-                bakery: bakery
-            }
+                bakeryId: bakery
+            },
+            limit, 
+            offset,
+            include: ['category']
         });
         return products;
     }
